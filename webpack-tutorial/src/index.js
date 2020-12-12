@@ -1,18 +1,29 @@
 import example from './images/qwe.png'
 import './styles/main.scss'
-class Game {
-    name = 'Violin Charades'
+class Square {
+    constructor(randomPositionLeft, randomPositionTop, randomColor) {
+        this.randomPositionLeft = randomPositionLeft;
+        this.randomPositionTop = randomPositionTop;
+        this.randomColor = randomColor;
+    }
+    newDiv = document.createElement("div");
+
+    initSquare() {
+        this.newDiv.style.backgroundColor = this.randomColor;
+        this.newDiv.style.top = this.randomPositionTop;
+        this.newDiv.style.left = this.randomPositionLeft;
+        this.newDiv.classList.add('square-item')
+        console.log(this.newDiv)
+        return this.newDiv;
+    }
 }
-const myGame = new Game()
+const gameField = document.querySelector('.main-field');
+const colors = ['red', 'blue', 'green'];
+const randomColor = colors.[Math.floor(Math.random() * colors.length)];
 
-// создаем параграф
-const p = document.createElement('p')
-p.textContent = `I like ${myGame.game}.`
 
-// создаем элемент заголовка
-const heading = document.createElement('h1')
-heading.textContent = 'Как интересно!'
+const randomPositionLeft = (Math.floor(Math.random() * gameField.offsetWidth )) + 'px';
+const randomPositionTop = (Math.floor(Math.random() * gameField.offsetHeight )) + 'px';
 
-// добавляем параграф и заголовок в DOM
-const root = document.querySelector('#root')
-root.append(heading, p)
+gameField.append(new Square(randomPositionLeft, randomPositionTop,randomColor).initSquare())
+
