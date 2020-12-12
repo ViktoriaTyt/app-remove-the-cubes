@@ -51,9 +51,7 @@ quantitySquare.initSquare();*/
 
 
 gameField.addEventListener('click', (e) => {
-    console.log(e.target)
-    if(e.target.classList.contains === 'square-item'){
-        console.log('qwe')
+    if(e.target.classList.contains('square-item')){
        removeItemSquare(e.target);
         let i = 0;
         const randomQuantityNum = randomQuantity();
@@ -61,8 +59,33 @@ gameField.addEventListener('click', (e) => {
             i++;
             addAnotherSquare()
         }
+        const counter = () => new Counter((e.target)).countDeleteSquare();
+        counter()
     }
+    //тут функция с подсчетом баллов
+
 });
+
+class Counter {
+    constructor(clickSquare) {
+        this.clickSquare = clickSquare;
+    }
+    counter = 0;
+    countDeleteSquare(){
+        debugger
+        switch (true) {
+        case this.clickSquare.classList.contains('redItem'):
+            this.counter += 1;break;
+        case this.clickSquare.classList.contains('blueItem'):
+            this.counter += 2;break;
+         case this.clickSquare.classList.contains('greenItem'):
+             this.counter += 3;break;
+            default:
+                console.log(`Sorry`);
+        }
+       return this.counter;
+    }
+}
 
 
 
